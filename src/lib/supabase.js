@@ -11,3 +11,6 @@ const anonKey = env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 const supabaseUrl = rawUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
 
 export const supabase = createClient(supabaseUrl, anonKey);
+
+export const ADMIN_PASSWORD = env.VITE_ADMIN_PASSWORD || "Siddhpur@Admin786";
+export const DEFAULT_MEMBER_PASSWORD = env.VITE_DEFAULT_MEMBER_PASSWORD || "786110";
