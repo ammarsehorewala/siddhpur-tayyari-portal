@@ -16,7 +16,7 @@ export default function App() {
   // Login form state
   const [loginTab, setLoginTab] = useState('member'); // 'member' | 'admin'
   const [loginIts, setLoginIts] = useState('');
-  const [loginPassword, setLoginPassword] = useState(DEFAULT_MEMBER_PASSWORD);
+  const [loginPassword, setLoginPassword] = useState('');
   const [showMemberPassword, setShowMemberPassword] = useState(false);
 
   const [adminEmail, setAdminEmail] = useState('admin@siddhpur.com');
@@ -122,7 +122,7 @@ export default function App() {
     }
 
     if (!loginPassword) {
-      showAlert('Please enter your password (default: 786110).', 'error');
+      showAlert('Please enter your password.', 'error');
       return;
     }
 
@@ -187,7 +187,7 @@ export default function App() {
         setRole(matchedProfile.role || 'member');
         showAlert(`أهلاً وسهلاً! Welcome, ${matchedProfile.full_name}.`, 'success');
       } else {
-        showAlert('Incorrect password. Default password for all members is 786110.', 'error');
+        showAlert('Incorrect password. Please contact Admin if you need assistance.', 'error');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -308,7 +308,7 @@ export default function App() {
 
       setMemberForm({ full_name: '', its_number: '', phone: '', role: 'member' });
       setShowAddMember(false);
-      showAlert(`Member ${cleanName} added! Login ID: ${cleanIts} (Password: ${DEFAULT_MEMBER_PASSWORD})`, 'success', 8000);
+      showAlert(`Member ${cleanName} added! Login ID: ${cleanIts}`, 'success', 6000);
       fetchData();
     } catch (err) {
       console.error('Error adding member:', err);
@@ -352,7 +352,7 @@ export default function App() {
       if (error) {
         showAlert(`Failed to update ITS: ${error.message}`, 'error');
       } else {
-        showAlert(`ITS ${clean} assigned to ${name}. They can now log in with password 786110.`, 'success');
+        showAlert(`ITS ${clean} assigned to ${name}.`, 'success');
         fetchData();
       }
     } catch (e) {
@@ -602,17 +602,13 @@ export default function App() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="block text-xs font-bold text-stone-700">
-                      Password
-                    </label>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">
-                      Default: 786110
-                    </span>
-                  </div>
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Password
+                  </label>
                   <div className="relative">
                     <input
                       type={showMemberPassword ? 'text' : 'password'}
+                      placeholder="Enter your password"
                       value={loginPassword}
                       onChange={e => setLoginPassword(e.target.value)}
                       className="w-full border border-stone-300 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-stone-800 focus:ring-2 focus:ring-emerald-700 focus:outline-none"
@@ -627,7 +623,7 @@ export default function App() {
                     </button>
                   </div>
                   <p className="text-[11px] text-stone-400 mt-1">
-                    Default password for all khidmat members is <strong className="text-stone-600">786110</strong>.
+                    Enter the password provided by Markaz Admin.
                   </p>
                 </div>
 
@@ -796,7 +792,7 @@ export default function App() {
                 <div>
                   <h3 className="text-base font-bold text-emerald-900 font-fatimi">Khidmat Team Directory</h3>
                   <p className="text-[11px] text-stone-500">
-                    {profiles.length} registered member{profiles.length === 1 ? '' : 's'} (Login: 8-digit ITS | PWD: 786110)
+                    {profiles.length} registered member{profiles.length === 1 ? '' : 's'} (Login: 8-digit ITS)
                   </p>
                 </div>
                 <button 
@@ -861,7 +857,6 @@ export default function App() {
                       <th className="py-2.5 px-3">Name</th>
                       <th className="py-2.5 px-3">8-Digit ITS (Login ID)</th>
                       <th className="py-2.5 px-3">Supabase Email</th>
-                      <th className="py-2.5 px-3">Default Password</th>
                       <th className="py-2.5 px-3">Role</th>
                       <th className="py-2.5 px-3 text-right">Actions</th>
                     </tr>
@@ -886,11 +881,6 @@ export default function App() {
                         </td>
                         <td className="py-2 px-3 text-stone-400 font-mono text-[11px]">
                           {p.its_number ? `${p.its_number}@siddhpur.com` : '—'}
-                        </td>
-                        <td className="py-2 px-3">
-                          <span className="bg-stone-100 text-stone-700 px-1.5 py-0.5 rounded font-mono text-[11px]">
-                            {DEFAULT_MEMBER_PASSWORD}
-                          </span>
                         </td>
                         <td className="py-2 px-3">
                           <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
