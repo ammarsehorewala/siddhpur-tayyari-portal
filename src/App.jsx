@@ -6,6 +6,7 @@ const SUPABASE_URL = "https://kfksyxgkvffhmulfxgcn.supabase.co/rest/v1/";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtma3N5eGdrdmZmaG11bGZ4Z2NuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxMTQ4ODIsImV4cCI6MjEwODY5MDg4Mn0.UEiQhnQGFkfEWUUbd2HKWXpl1NUgbHZphIz_7G_7W9M";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [role, setRole] = useState('admin');
